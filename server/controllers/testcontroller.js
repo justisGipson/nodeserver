@@ -12,13 +12,77 @@ router.post('/one', (req, res) => {
 });
 
 router.post('/two', (req, res) => {
-    let testData = 'Test data for endpoint two';
+    var testData = 'Test data for endpoint two';
 
     TestModel.create({
         testdata: testData
-    }).then(dataFromDatabase => {
-        res.send('Test two went through')
+    }).then(data => {
+        res.send(data)
+    });
+});
+
+router.post('/three', (req, res) => {
+    var testData = req.body.testdata.item;
+
+    TestModel.create({
+        testdata: testData
     })
+    res.send('Test three went through')
+    console.log('Test three went through')
+});
+
+router.post('/four', (req, res) => {
+    var testData = req.body.testdata.item;
+
+    TestModel.create({
+        testdata: testData
+    }).then(
+        message = () => {
+            res.send('Test 4 went through');
+        }
+    );
+});
+
+router.post('/five', (req, res) => {
+    var testData = req.body.testdata.item;
+
+    TestModel.create({
+        testdata: testData
+    }).then(
+        message = (data) => {
+            res.send(data);
+        }
+    )
+});
+
+router.post('/six', (req, res) => {
+    var testData = req.body.testdata.item;
+
+    TestModel.create({
+        testdata: testData
+    }).then(
+        message = (testData) => {
+            res.json({
+                testdata: testData
+            });
+        }
+    );
+});
+
+router.post('/seven', (req, res) => {
+    var testData = req.body.testdata.item;
+
+    TestModel.create({
+        testdata: testData
+    }).then(
+        createSuccess = (testData) => {
+            res.json({
+                testdata: testData
+            });
+        }, createError = (err) => {
+            res.send(500, err.message);
+        }
+    );
 });
 
 module.exports = router;
