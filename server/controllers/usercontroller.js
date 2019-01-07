@@ -28,4 +28,16 @@ router.post('/createuser', (req, res) => {
     );
 });
 
+router.post('/signin', (req, res) => {
+    User.findOne({where: {username: req.body.user.username}}).then(
+        function(user){
+            if(user){
+                res.json(user);
+            } else {
+                res.status(500).send({error: 'you failed, yo'});
+            }
+        }
+    );
+});
+
 module.exports = router;
