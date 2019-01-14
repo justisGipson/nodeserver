@@ -23,5 +23,5 @@ app.use(require('./middleware/validate-session'));
 app.use('/authtest', authTest);
 
 app.listen(3000, () => {
-    console.log('App is listening on 3000')
+    console.log('App is listening on 3000', 'this is a test')
 });
